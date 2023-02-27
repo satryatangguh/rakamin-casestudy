@@ -2,13 +2,13 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route,
-  Link
+  Route
 } from "react-router-dom"
 import Footer from './components/Footer';
 import Header from './components/Header';
 import Home from './pages/Home';
 import About from './pages/About';
+import Product from './pages/Product';
 import Contact from './pages/Contact';
 
 
@@ -21,6 +21,7 @@ function App() {
           <Routes> 
             <Route exact path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
+            <Route path='/products/:id' element={<Product />} />
             <Route path='/contact' element={<Contact /> } />
           </Routes>
         </div>
