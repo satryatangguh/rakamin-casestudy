@@ -1,33 +1,36 @@
-import React, { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function useAxiosGet() {
-  const [products, setProducts] = useState({
+function useAxiosGet(url) {
+  const [request, setRequest] = useState({
     loading: false,
     data: null,
     error: false
   })
   
   useEffect(() => {
-    setProducts({
+    setRequest({
       loading: true,
       data: null,
       error: false
     })
-    axios.get("https://63fcb54d859df29986c2b6c5.mockapi.io/api/v1/products?page=1&limit=10")
+    axios.get(url)
       .then(response => {
-        setProducts({
+        setRequest({
           loading: false,
           data: response.data,
           error: false
         })
       }).catch(error => {
-        setProducts({
+        setRequest({
           loading: false,
           data: null,
           error: true
         })
       })
-  }, [])
+  }, [url])
+  
+  return request
 }
 
 export default useAxiosGet;

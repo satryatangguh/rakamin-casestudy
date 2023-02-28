@@ -1,36 +1,12 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import React from "react";
 import Loader from "../components/Loader";
 import ProductCard from "../components/ProductCard";
+import useAxiosGet from "../hooks/useAxiosGet";
 
 function Home() {
-  const [products, setProducts] = useState({
-    loading: false,
-    data: null,
-    error: false
-  })
-  
-  useEffect(() => {
-    setProducts({
-      loading: true,
-      data: null,
-      error: false
-    })
-    axios.get("https://63fcb54d859df29986c2b6c5.mockapi.io/api/v1/products?page=1&limit=10")
-      .then(response => {
-        setProducts({
-          loading: false,
-          data: response.data,
-          error: false
-        })
-      }).catch(error => {
-        setProducts({
-          loading: false,
-          data: null,
-          error: true
-        })
-      })
-  }, [])
+  const url = "https://63fcb54d859df29986c2b6c5.mockapi.io/api/v1/products?page=1&limit=12"
+
+  let products = useAxiosGet(url)
 
   let content = null
   
@@ -44,11 +20,15 @@ function Home() {
 
   if (products.data) {
     content =
-      products.data.map((product) => 
-        <div key={product.id}>
-          <ProductCard product={product} />
+      <div className="container-fluid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {products.data.map((product) =>
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          )}
         </div>
-      )
+      </div>
   }
 
   return (

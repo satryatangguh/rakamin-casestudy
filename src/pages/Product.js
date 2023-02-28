@@ -1,40 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import { useParams } from "react-router-dom";
 import Loader from '../components/Loader';
+import useAxiosGet from '../hooks/useAxiosGet';
 
 function Product() {
-  const [product, setProduct] = useState({
-    loading: false,
-    data: null,
-    error: false
-  })
   const { id } = useParams();
-
+  const url = `https://63fcb54d859df29986c2b6c5.mockapi.io/api/v1/products/${id}`
+  
+  let product = useAxiosGet(url)
+  
   let content = null
-
-
-  useEffect(() => {
-    setProduct({
-      loading: true,
-      data: null,
-      error: false
-    })
-    axios.get(`https://63fcb54d859df29986c2b6c5.mockapi.io/api/v1/products/${id}`)
-      .then(response => {
-        setProduct({
-          loading: false,
-          data: response.data,
-          error: false
-        })
-      }).catch(error => {
-        setProduct({
-          loading: false,
-          data: null,
-          error: true
-        })
-      })
-  }, [id])
 
   if (product.error) {
     content = <p>Not Found. Please refresh or try again</p>
