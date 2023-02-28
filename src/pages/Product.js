@@ -55,7 +55,8 @@ function Product() {
             alt={product.data.name}
           />
         </div>
-        <p className='text-md mt-1'>{product.data.description}</p>
+        <p className='text-md mt-1 font-bold'>$ {product.data.price}</p>
+        <p className='text-md'>{product.data.description}</p>
       </div>
   }
   

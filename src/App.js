@@ -15,18 +15,20 @@ import Contact from './pages/Contact';
 function App() {
   return (
     <>
-      <Router>  
-        <Header />
-        <div className='p-3'>
-          <Routes> 
-            <Route exact path='/' element={<Home />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/products/:id' element={<Product />} />
-            <Route path='/contact' element={<Contact /> } />
-          </Routes>
-        </div>
-        <Footer />
-      </Router>
+      <div className='relative pb-10 min-h-screen'>
+        <Router>  
+          <Header />
+          <div className='p-3'>
+            <Routes> 
+              <Route exact path='/' element={<Home />} />
+              <Route path='/about' element={<About />} />
+              <Route path='/products/:id' element={<Product />} />
+              <Route path='/contact' element={<Contact /> } />
+            </Routes>
+          </div>
+          <Footer />
+        </Router>
+      </div>
     </>
   );
 }
